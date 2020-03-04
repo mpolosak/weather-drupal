@@ -1,0 +1,7 @@
+weather.content:
+  path: '/pogoda'
+  defaults:
+    _controller: '\Drupal\weather\Controller\WeatherController::content'
+    _title: 'Pogoda w Warszawie'
+  requirements:
+    _permission: 'access content'

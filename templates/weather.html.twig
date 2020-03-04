@@ -1,0 +1,50 @@
+<style>
+  .weatherul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    clear: both;
+  }
+  .weatherdiv{
+    float: left;
+  }
+  .weatherdiv img{
+    width: 50px;
+    height: 50px;
+  }
+</style>
+<div class="weatherdiv">
+  <img src="http://openweathermap.org/img/wn/{{ weather.weather.0.icon }}@2x.png"></img>
+</div>
+<div class="weatherdiv">
+  <h3>{{ weather.main.temp }} &#8451</h3>
+</div>
+<ul class="weatherul">
+  <li>
+    {{ weather.weather.0.description|capitalize }}
+  </li>
+  <li>
+    Temperatura odczuwalna: {{ weather.main.feels_like }} &#8451;
+  </li>
+  <li>
+    Ciśnienie: {{ weather.main.pressure}} hPa
+  </li>
+  <li>
+    Wilgotność: {{ weather.main.humidity}} %
+  </li>
+  <li>
+    Prędkość wiatru: {{ weather.wind.speed }} m/s
+  </li>
+  <li>
+    Kierunek wiatru: {{ weather.wind.deg }} &deg
+  </li>
+  <li>
+    Zachmurzenie: {{ weather.clouds.all }} %
+  </li>
+  <li>
+    Wschód słońca: {{ weather.sys.sunrise|format_date('custom', 'H:i') }}
+  </li>
+  <li>
+    Zachód słońca: {{ weather.sys.sunset|format_date('custom', 'H:i') }}
+  </li>
+</ul>

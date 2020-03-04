@@ -1,0 +1,6 @@
+name:  Weather module
+description: Gets weather in Warsaw from OpeanWeatherMap
+package: Custom
+
+type: module
+core: 8.x
