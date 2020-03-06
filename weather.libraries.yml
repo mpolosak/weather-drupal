@@ -1,0 +1,5 @@
+weather:
+  version: 1.x
+  css:
+    layout:
+      css/weather.css: {}

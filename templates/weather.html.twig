@@ -1,18 +1,4 @@
-<style>
-  .weatherul{
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    clear: both;
-  }
-  .weatherdiv{
-    float: left;
-  }
-  .weatherdiv img{
-    width: 50px;
-    height: 50px;
-  }
-</style>
+{{ attach_library('weather/weather') }}
 <div class="weatherdiv">
   <img src="http://openweathermap.org/img/wn/{{ weather.weather.0.icon }}@2x.png"></img>
 </div>
