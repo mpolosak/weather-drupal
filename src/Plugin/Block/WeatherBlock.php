@@ -11,7 +11,7 @@ use Drupal\Core\Block\BlockBase;
  *   admin_label = @Translation("Weather block"),
  * )
  */
-class FaxBlock extends BlockBase {
+class WeatherBlock extends BlockBase {
   /**
   * {@inheritdoc}
   */
