@@ -3,7 +3,7 @@ Drupal module showing weather data from OpeanWeatherMap
 
 ## Installation
 1. Copy it content into modules dir of Drupal
-2. Replace {appid} in src/WeatherController.php with your appid
+2. Replace {appid} in src/WeatherController.php and src/Plugin/Block/WeatherBlock.php with your appid
 
 ## TODO:
 - [ ] Add module settings where user can set:
