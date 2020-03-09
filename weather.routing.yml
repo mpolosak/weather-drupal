@@ -5,3 +5,10 @@ weather.content:
     _title: 'Pogoda w Warszawie'
   requirements:
     _permission: 'access content'
+weather.config:
+  path: '/admin/config/system/weather'
+  defaults:
+    _title: 'Weather configuration'
+    _form: '\Drupal\weather\Form\WeatherForm'
+  requirements:
+    _permission: 'administer site configuration'

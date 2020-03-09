@@ -1,0 +1,5 @@
+entity.example.collection:
+  title: 'Weather module settings'
+  parent: system.admin_config_system
+  description: 'Settings of weather module'
+  route_name: weather.config
