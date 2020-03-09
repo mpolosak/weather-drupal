@@ -18,7 +18,13 @@ class WeatherBlock extends BlockBase {
   public function build() {
     $config = \Drupal::config('weather.config');
     $appid = $config->get('appid');
-    // TODO: Check if appid isset. If not show message with info when to set appid 
+    if($appid=='')
+    {
+      return array(
+        '#theme' => 'markup',
+        '#markup' => $this->t("API key isn't setted. Set it in admin/config/system/weather")
+      );
+    }
     $client = \Drupal::httpClient();
     $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
     try{
