@@ -5,32 +5,40 @@
 <div class="weatherdiv">
   <h3>{{ weather.main.temp }} &#8451</h3>
 </div>
-<ul class="weatherul">
-  <li>
-    {{ weather.weather.0.description|capitalize }}
-  </li>
-  <li>
-    Temperatura odczuwalna: {{ weather.main.feels_like }} &#8451;
-  </li>
-  <li>
-    Ciśnienie: {{ weather.main.pressure}} hPa
-  </li>
-  <li>
-    Wilgotność: {{ weather.main.humidity}} %
-  </li>
-  <li>
-    Prędkość wiatru: {{ weather.wind.speed }} m/s
-  </li>
-  <li>
-    Kierunek wiatru: {{ weather.wind.deg }} &deg
-  </li>
-  <li>
-    Zachmurzenie: {{ weather.clouds.all }} %
-  </li>
-  <li>
-    Wschód słońca: {{ weather.sys.sunrise|format_date('custom', 'H:i') }}
-  </li>
-  <li>
-    Zachód słońca: {{ weather.sys.sunset|format_date('custom', 'H:i') }}
-  </li>
-</ul>
+<div class="clear-both">
+{{ weather.weather.0.description|capitalize }}
+</div>
+<table>
+  <tr>
+    <td>Temperatura odczuwalna</td>
+    <td>{{ weather.main.feels_like }} &#8451;</td>
+  </tr>
+  <tr>
+    <td>Ciśnienie</td>
+    <td>{{ weather.main.pressure}} hPa</td>
+  </tr>
+  <tr>
+    <td>Wilgotność</td>
+    <td>{{ weather.main.humidity}} %</td>
+  </tr>
+  <tr>
+    <td>Prędkość wiatru</td>
+    <td>{{ weather.wind.speed }} m/s</td>
+  </tr>
+  <tr>
+    <td>Kierunek wiatru</td>
+    <td>{{ weather.wind.deg }} &deg</td>
+  </tr>
+  <tr>
+    <td>Zachmurzenie</td>
+    <td>{{ weather.clouds.all }} %</td>
+  </tr>
+  <tr>
+    <td>Wschód słońca</td>
+    <td>{{ weather.sys.sunrise|format_date('custom', 'H:i') }}</td>
+  </tr>
+  <tr>
+    <td>Zachód słońca</td>
+    <<td>{{ weather.sys.sunset|format_date('custom', 'H:i') }}</td>
+  </tr>
+</table>
