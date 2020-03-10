@@ -7,8 +7,8 @@ Drupal module showing weather data from OpeanWeatherMap
 
 ## TODO:
 - [ ] Add module settings where user can set:
-  - [ ] appid (insted of changing it in WeatherController.php)
+  - [x] appid (insted of changing it in WeatherController.php)
   - [ ] place (now module shows weather for Warsaw)
 - [ ] Make english default language (replace content in Polish with English, then add location for Polish)
 * Translate it to other languages
-- [ ] Add weather block
+- [x] Add weather block
