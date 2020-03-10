@@ -2,6 +2,8 @@
 namespace Drupal\weather\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
+use Drupal\Core\Block\BlockPluginInterface;
+use Drupal\Core\Form\FormStateInterface;
 
 /**
  * Provides a 'weather' block.
@@ -11,13 +13,15 @@ use Drupal\Core\Block\BlockBase;
  *   admin_label = @Translation("Weather block"),
  * )
  */
-class WeatherBlock extends BlockBase {
+class WeatherBlock extends BlockBase implements BlockPluginInterface {
   /**
   * {@inheritdoc}
   */
   public function build() {
     $config = \Drupal::config('weather.config');
     $appid = $config->get('appid');
+    $blockconfig = $this->getConfiguration();
+    $city = $blockconfig['city'];
     if($appid=='')
     {
       return array(
@@ -28,7 +32,7 @@ class WeatherBlock extends BlockBase {
     $client = \Drupal::httpClient();
     $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
     try{
-      $response=$client->request('GET','api.openweathermap.org/data/2.5/weather?q=Warsaw,pl&units=metric&lang='.$language.'&appid='.$appid);
+      $response=$client->request('GET','api.openweathermap.org/data/2.5/weather?q='.$city.'&units=metric&lang='.$language.'&appid='.$appid);
       $body = $response->getBody()->getContents();
       $data = json_decode($body);
     }
@@ -41,8 +45,36 @@ class WeatherBlock extends BlockBase {
       '#weather'=>$data
     );
   }
+  /**
+   * {@inheritdoc}
+   */
   public function getCacheMaxAge()
   {
     return 15;
+  }
+  /**
+   * {@inheritdoc}
+   */
+  public function blockForm($form, FormStateInterface $form_state) {
+    $form = parent::blockForm($form, $form_state);
+
+    $config = $this->getConfiguration();
+
+    $form['city']=[
+      '#type' => 'textfield',
+      '#title' => $this->t('City'),
+      '#default_value' => isset($config['city'])?$config['city']:'',
+      '#required' => true,
+    ];
+
+    return $form;
+  }
+  /**
+   * {@inheritdoc}
+   */
+  public function blockSubmit($form, FormStateInterface $form_state) {
+    parent::blockSubmit($form, $form_state);
+    $values = $form_state->getValues();
+    $this->setConfigurationValue('city', $values['city']);
   }
 }
