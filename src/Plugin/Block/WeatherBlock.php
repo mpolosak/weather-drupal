@@ -4,7 +4,7 @@ namespace Drupal\weather\Plugin\Block;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Block\BlockPluginInterface;
 use Drupal\Core\Form\FormStateInterface;
-
+use GuzzleHttp\Exception\ClientException;
 /**
  * Provides a 'weather' block.
  *
@@ -36,9 +36,23 @@ class WeatherBlock extends BlockBase implements BlockPluginInterface {
       $body = $response->getBody()->getContents();
       $data = json_decode($body);
     }
-    catch(auto $e)
+    catch(ClientException $e)
     {
-      // TODO: write what to do when exeption happens
+      $response = $e->getResponse();
+      switch ($response->getStatusCode()) {
+        case 401:
+          return array(
+            '#theme' => 'markup',
+            '#markup' => $this->t("Incorect API key. Set it in admin/config/system/weather")
+          );
+          break;
+        default:
+          return array(
+            '#theme' => 'markup',
+            '#markup' => $this->t('OpenWeatherMap returned:').$response->getStatusCode().":".$response->getReasonPhrase()
+          );
+          break;
+      }
     }
     return array(
       '#theme' => 'weather',
