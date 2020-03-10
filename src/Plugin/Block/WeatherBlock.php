@@ -41,4 +41,8 @@ class WeatherBlock extends BlockBase {
       '#weather'=>$data
     );
   }
+  public function getCacheMaxAge()
+  {
+    return 15;
+  }
 }
