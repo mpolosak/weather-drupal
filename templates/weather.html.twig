@@ -1,13 +1,9 @@
 {{ attach_library('weather/weather') }}
 <div class="weatherdiv">
   <img src="http://openweathermap.org/img/wn/{{ weather.weather.0.icon }}@2x.png"></img>
-</div>
-<div class="weatherdiv">
   <h3>{{ weather.main.temp }} &#8451</h3>
 </div>
-<div class="clear-both">
 {{ weather.weather.0.description|capitalize }}
-</div>
 <table>
   <tr>
     <td>Temperatura odczuwalna</td>
