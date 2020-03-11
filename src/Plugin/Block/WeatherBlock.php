@@ -42,13 +42,16 @@ class WeatherBlock extends BlockBase implements BlockPluginInterface {
       switch ($response->getStatusCode()) {
         case 401:
           return array(
-            '#theme' => 'markup',
             '#markup' => $this->t("Incorect API key. Set it in admin/config/system/weather")
+          );
+          break;
+        case 404:
+          return array(
+            '#markup' => $this->t('Incorect city name. Set it in block settings')
           );
           break;
         default:
           return array(
-            '#theme' => 'markup',
             '#markup' => $this->t('OpenWeatherMap returned:').$response->getStatusCode().":".$response->getReasonPhrase()
           );
           break;
