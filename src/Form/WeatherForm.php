@@ -4,6 +4,7 @@ namespace Drupal\weather\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use GuzzleHttp\Exception\ClientException;
 
 class WeatherForm extends FormBase {
 
@@ -39,9 +40,17 @@ class WeatherForm extends FormBase {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
-    // TODO: Connect to OpenWeatherMap to check if API key is correct
-    if (!strlen($form_state->getValue('appid'))) {
+    $appid = $form_state->getValue('appid');
+    if (!strlen($appid)) {
       $form_state->setErrorByName('appid', $this->t('Please enter API key'));
+    }
+    $client = \Drupal::httpClient();
+    try{
+      $response=$client->request('GET','api.openweathermap.org/data/2.5/weather?q=Warsaw&units=metric&appid='.$appid);
+    }
+    catch(ClientException $e)
+    {
+      $form_state->setErrorByName('appid', $this->t('Incorrect API key'));
     }
   }
 
